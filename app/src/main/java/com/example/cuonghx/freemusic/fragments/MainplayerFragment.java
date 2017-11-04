@@ -122,6 +122,8 @@ public class MainplayerFragment extends Fragment {
 
                 String filename =  topSongModel.getSong()+ "-" + topSongModel.getArtist() + ".mp3";
 
+                Log.d("cuonghx", "onClick: " + filename);
+
                 File myDirectory = new File(Environment.getExternalStorageDirectory(), "Music Download");
 
                 if(!myDirectory.exists()) {
