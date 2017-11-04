@@ -28,7 +28,6 @@ import butterknife.ButterKnife;
 public class DowloadFragment extends Fragment {
 
 
-    private List<TopSongModel> list = new ArrayList<>();
     @BindView(R.id.rc_view_download)
     RecyclerView recyclerView;
 
@@ -47,6 +46,8 @@ public class DowloadFragment extends Fragment {
     }
 
     private void SetUpUI(View view) {
+
+        List<TopSongModel> list = new ArrayList<>();
         ButterKnife.bind(this, view);
 
 
@@ -58,9 +59,12 @@ public class DowloadFragment extends Fragment {
 
         for (File file : myDirectory.listFiles()){
             String name = file.getName();
-            TopSongModel topSongModel = new TopSongModel(name.substring(0, name.indexOf("-")),name.substring(name.indexOf("-" ) + 1,name.indexOf(".mp3")), null);
-            list.add(topSongModel);
-            Log.d("cuonghx", "SetUpUI: " + topSongModel.getArtist());
+            int index = name.indexOf("-");
+            if (index > 0 ){
+                TopSongModel topSongModel = new TopSongModel(name.substring(0, index), name.substring(index + 1, name.indexOf(".mp3")), null);
+                list.add(topSongModel);
+                Log.d("cuonghx", "SetUpUI: " + topSongModel.getArtist());
+            }
         }
 
         DownloadAdpater downloadAdpater = new DownloadAdpater(getContext(),list );
